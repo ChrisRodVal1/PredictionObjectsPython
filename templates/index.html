@@ -1,0 +1,36 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChristianRodriguezValdiviezo</title>
+</head>
+<body>
+    <h1>Object Detection</h1>
+    <button onclick="startDetection()">Start Detection</button>
+    <button onclick="stopDetection()">Stop Detection</button>
+    <br>
+    <img id="webcamFeed" src="{{ url_for('video_feed') }}" alt="Webcam Feed">
+
+    <script>
+        function startDetection() {
+            fetch('/start_detection', { method: 'POST' })
+                .then(response => {
+                    console.log(response);
+                    document.getElementById("webcamFeed").src = "{{ url_for('video_feed') }}";
+                });
+                location.reload();
+        }
+
+        function stopDetection() {
+            fetch('/stop_detection', { method: 'POST' })
+                .then(response => {
+                    console.log(response);
+                    
+                });
+                location.reload();
+        }
+    </script>
+</body>
+</html>
